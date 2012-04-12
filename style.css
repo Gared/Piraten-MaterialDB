@@ -1,0 +1,90 @@
+/*---------------------------------------------------------------------------------------------*/
+/*	CSS Reset by Eric Meyer: http://meyerweb.com/eric/tools/css/reset/ v2.0
+/*---------------------------------------------------------------------------------------------*/
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,a,img,strong,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{border:0;font-size:100%;font:inherit;vertical-align:baseline;margin:0;padding:0;}
+address{padding:0 0 20px;}
+abbr,acronym{border-bottom:.1em dotted;}
+ins{background:#f0f0f0;text-decoration:none;}
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block;}
+ol,ul{list-style:none;}
+blockquote:before,blockquote:after{content:none;}
+table{border-collapse:collapse;border-spacing:0;}
+input:focus,textarea:focus{border:1px solid #999; outline:0;}
+a:hover, a:active, a:focus { outline: none; -moz-outline-style: none;}
+
+
+body {
+  font-family: sans;
+}
+
+#header {
+  height: 60px;
+  width: 100%;
+  position: relative;
+  
+/*
+  box-shadow: 0 2px 2px 1px rgba(0,0,0,0.2);
+*/
+  background-color: #272828 ;
+  color: white;
+}
+
+#header a, a:active, a:visited {
+  color: white;
+  text-decoration: none;
+}
+
+#header a:hover {
+  color: #FF8800;
+  text-decoration: underline;
+}
+
+#logout_menu {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+}
+
+#nav_bar {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+}
+
+#main {
+  margin: 200px auto;
+}
+
+#login_box {
+  margin: 200px auto;
+  background-color: silver;
+  border-radius: 8px;
+  padding: 20px;
+  width: 200px;
+}
+
+#login_box input[type=text],input[type=password] {
+  border: none;
+  width: 200px;
+  margin-bottom: 10px;
+
+}
+
+.materialliste {
+  border: 1px solid gray;
+}
+
+.materialliste thead {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.materialliste td {
+  padding: 5px 10px;
+  border: 1px solid silver;
+}
+
+.materialliste img {
+  max-height: 60px;
+  max-width: 100px;
+}
