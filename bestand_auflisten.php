@@ -1,31 +1,21 @@
 <?php
   // Mit Datenbank verbinden
   include 'db_connect.php';
+  include 'models/bestandListe.php';
   
-  // MySQL-Abfrage
-  $query="SELECT teile.bild_url, teile.bezeichnung, kategorien.bezeichnung as kategorie, bestand.anzahl, lager.ort, bestand.datum
-          FROM bestand, teile, kategorien, lager
-          WHERE bestand.teile_ID = teile.ID
-          AND teile.kategorie_ID = kategorien.ID
-          AND bestand.lager_ID = lager.ID
-          ORDER BY kategorie ASC, teile.bezeichnung ASC";
-  
-  $result = mysql_query($query);
-  
-  // Erzeugen der Tabelle
-  echo '<table class="materialliste">';
-  echo '<thead><tr><td>Bild</td><td>Bezeichnung</td><td>Kategorie</td><td>Anzahl</td><td>Lagert in</td><td>Eingetragen am</td></tr></thead>';
-  echo '<tbody>';
-  
-  // Zeilenweise Ausgabe der Daten
-  while($row = mysql_fetch_object($result)){
-    echo "<tr><td><img src=\"$row->bild_url\" alt=\"$row->bezeichnung\" /></td><td> $row->bezeichnung </td><td> $row->kategorie </td><td> $row->anzahl </td><td> $row->ort </td><td> $row->datum </td></tr> \n";
+  // Holen aller Bestandslisten
+  $bestandListe = bestandListeModel::getAllBestandListe();
 
-  }
-
-  echo '</tbody>';
-  echo '</table>';
-  
+  // Erstellen einer neuen Tabelle
+  $table = new customTable('materialliste');
+  // Setzen der Tabellenheader
+  $table->set_header(array('Bild', 'Bezeichnung', 'Kategorie', 'Anzahl', 'Lagert in', 'Eingetragen am'));
+  // Setzen der Zeilen der Tabelle
+  $table->set_values($bestandListe);
+  // Setzen der Spaltenanzeige
+  $table->set_column_layout('111111');
+  // Generiere und zeichne Tabelle
+  $table->show();
   
   mysql_close($link);
 ?>

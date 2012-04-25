@@ -1,13 +1,15 @@
 <?php
   // Mit Datenbank verbinden
   include 'db_connect.php';
+  include 'models/teile.php';
+  include 'models/lager.php';
 ?>
   
 <!-- Formular mit Feldern und Dropdowns für die Einträge in die Bestandsliste -->
 <form action="index.php" type="POST">
   <table>
     <thead>
-      <tr><td>Teil auswählen</td><td>Anzahl</td><td>im Lager</td></tr>
+      <tr><td>Teil ausw&auml;hlen</td><td>Anzahl</td><td>im Lager</td></tr>
     </thead>
     <tbody>
       <tr>
@@ -15,14 +17,11 @@
           <select name="teil" size="1">
         
           <?php
-            // MySQL-Abfrage
-            $query="SELECT * FROM teile";
-        
-            $result = mysql_query($query);
+            // Laden aller Teile
+            $teile = teilModel::getAllTeile();
             // Dropdown mit Einträgen Füllen
-            while($row = mysql_fetch_object($result)){
-              echo "<option value=\"$row->ID\">$row->bezeichnung</option>";
-
+            foreach ($teile as $teil){
+              echo "<option value=\"$teil->id\">$teil->bezeichnung</option>";
             }
           ?>
 
@@ -35,14 +34,11 @@
           <select name="lager" size="1">
         
           <?php
-            // MySQL-Abfrage
-            $query="SELECT * FROM lager";
-        
-            $result = mysql_query($query);
+            // Laden aller Lager
+            $lagerArr = lagerModel::getAllLager();
             // Dropdown mit Einträgen Füllen
-            while($row = mysql_fetch_object($result)){
-              echo "<option value=\"$row->ID\">$row->ort</option>";
-
+            foreach ($lagerArr as $lager){
+              echo "<option value=\"$lager->id\">$lager->ort</option>";
             }
           ?>
 

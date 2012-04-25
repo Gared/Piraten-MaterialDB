@@ -11,23 +11,18 @@
       // Mit Datenbank verbinden
       include 'db_connect.php';
 
-      // MySQL-Abfrage direkt nach übermitteltem Benutzername filtern. Erspart eine Schleife
-      $query="SELECT ID, pw_hash FROM benutzer WHERE ID = '$post_userID'";
+      include 'models/benutzer.php';
 
-      $result = mysql_query($query);
-      $row = mysql_fetch_object($result);
-      $db_userID  = $row->ID;
-      $db_pw_hash = $row->pw_hash;
-      $db_pw_salt = $row->pw_salt;
+      $benutzer = benutzerModel::getBenutzerWithIDAndPassword($post_userID, $post_pw_hash);
 
       $hostname = $_SERVER['HTTP_HOST'];
       $path = dirname($_SERVER['PHP_SELF']);
 
       // Benutzername und Passwort werden überprüft
-      if ($post_userID == $db_userID && $post_pw_hash == $db_pw_hash) {
+      if ($benutzer != null) {
          // Session-Variablen setzten
          $_SESSION['angemeldet'] = true;
-         $_SESSION['userID'] = $db_userID;
+         $_SESSION['userID'] = $post_userID;
 
          // Weiterleitung zur geschützten Startseite
          if ($_SERVER['SERVER_PROTOCOL'] == 'HTTP/1.1') {
@@ -47,7 +42,7 @@
 <html>
    <link rel="stylesheet" type="text/css" media="all" href="./style.css" />
    <head>
-      <title>Geschützter Bereich</title>
+      <title>Gesch&uuml;tzter Bereich</title>
    </head>
    <body>
       Demoinstanz - Login mit "demo" / "demo"
